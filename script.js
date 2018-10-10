@@ -1,4 +1,3 @@
-
 window.myCPP = window.myCPP || {};
 
     //replace with the CCP URL for the current Amazon Connect instance
@@ -44,7 +43,7 @@ window.myCPP = window.myCPP || {};
         contact.onEnded(clearContactAttribute);
     }
 
-    function subscribeToAgentEvents(){
+    function subscribeToAgentEvents(agent){
          console.log("Subscribing to agent events...");
          var name = agent.getName();
          console.log("Agent Name Is " + name);
@@ -66,9 +65,12 @@ window.myCPP = window.myCPP || {};
             }
         }
 
-    function updateUi(){
-       logInfoMsg("DODO-Agent has been connected");
+    function updateUi(contact){
+        logInfoMsg("DODO-Agent has been connected");
+       // logInfoMsg("LATEST attributes are " + JSON.stringify(window.myCPP.contact.getAttributes()));
         logInfoMsg("LATEST attributes are " + JSON.stringify(contact.getAttributes()));
+        clearContactAttribute();
+        updateContactAttribute(contact.getAttributes());
         console.log('2DODO-Agent has been connected'); 
 
     }
@@ -104,4 +106,3 @@ hideLogsBtn.addEventListener('click',replaceDisplay);
             showLogsDiv.style.display = showLogsDiv.style.display === 'none' ? '' : 'none';
             hideLogsDiv.style.display = hideLogsDiv.style.display === 'none' ? '' : 'none';
     }
-
