@@ -2,6 +2,7 @@ window.myCPP = window.myCPP || {};
 
     //replace with the CCP URL for the current Amazon Connect instance
     const ccpUrl = "https://implementation.awsapps.com/connect/ccp#/";
+    var acEndpoint = "https://implementation.awsapps.com/connect/";
 
     //add any contact attributes to be excluded
 
@@ -36,8 +37,9 @@ window.myCPP = window.myCPP || {};
         var contactId = contact.getContactId();
         logInfoMsg("Contact is from queue " + contact.getQueue().name);    
         logInfoMsg("ContactID is " + contactId);   
+        var recordingLinkDesc = ConstructRecordingLink(taskACCallContactId);
+        logInfoMsg(recordingLinkDesc);
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-
          
         updateContactAttribute(contact.getAttributes());   
 
@@ -92,6 +94,24 @@ window.myCPP = window.myCPP || {};
         connect.getLog().info(msg);
         logMsgToScreen(msg);
     }
+
+    function ConstructRecordingLink(callContactId) {
+    if (acEndpoint) {
+    // normalize minimal flexibility in source Url.
+    if (!acEndpoint.endsWith("/")) {
+      acEndpoint = acEndpoint + "/";
+    }
+
+    // sample URL= https://acsf-rd.awsapps.com/connect/get-recording?format=mp3&callLegId=6ba247f2-5726-41da-89b5-321460d1ab22
+    var fullUrl =
+      acEndpoint +
+      "connect/get-recording?format=mp3&callLegId=" +
+      callContactId;
+    return "Listen to Call Recording: " + fullUrl;
+  }
+}
+
+
 
 
 // LogMessages section display controls
