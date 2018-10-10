@@ -38,7 +38,7 @@ window.myCPP = window.myCPP || {};
         logInfoMsg("Contact is from queue " + contact.getQueue().name);    
         logInfoMsg("ContactID is " + contactId);   
         var recordingLinkDesc = ConstructRecordingLink(taskACCallContactId);
-        logInfoMsg(recordingLinkDesc);
+        logInfoMsg(recordingLinkDesc(contactId));
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
          
         updateContactAttribute(contact.getAttributes());   
