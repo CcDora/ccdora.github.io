@@ -32,8 +32,10 @@ window.myCPP = window.myCPP || {};
         } else {
             logInfoMsg("This is an existing contact for this agent");
         }
+
+        var contactId = contact.getContactId();
         logInfoMsg("Contact is from queue " + contact.getQueue().name);    
-        logInfoMsg("ContactID is " + contact.getContactId());   
+        logInfoMsg("ContactID is " + contactId);   
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
 
          
@@ -66,12 +68,12 @@ window.myCPP = window.myCPP || {};
         }
 
     function updateUi(contact){
-        logInfoMsg("DODO-Agent has been connected");
+        logInfoMsg("Connecting agent and updating UI...");
        // logInfoMsg("LATEST attributes are " + JSON.stringify(window.myCPP.contact.getAttributes()));
-        logInfoMsg("LATEST attributes are " + JSON.stringify(contact.getAttributes()));
+        logInfoMsg("Latest call attributes are " + JSON.stringify(contact.getAttributes()));
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
-        console.log('2DODO-Agent has been connected'); 
+        console.log('Agent has been connected'); 
 
     }
         
