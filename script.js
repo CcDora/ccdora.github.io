@@ -42,9 +42,9 @@ window.myCPP = window.myCPP || {};
   
         logInfoMsg("ContactId is " + contactId);   
         logInfoMsg("Contact is from queue " + queueName);          
-        logInfoMsg("Download call recording " + acCallRecordingLink);
+        logInfoMsg(acCallRecordingLink);
         logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
-        logInfoMsg("Attr1" + JSON.stringify(acAttribute.dnis));
+        logInfoMsg("Attr1" + JSON.stringify(acAttribute.dnis.value));
          
         updateContactAttribute(contact.getAttributes());   
 
@@ -58,8 +58,8 @@ window.myCPP = window.myCPP || {};
          let agentName = agent.getName();
          let agentConfig = agent.getConfiguration();
 
-         logInfoMsg("Agent name " + agentName);  
-         logInfoMsg("Agent configuration " + agentConfig);
+         logInfoMsg("Agent name is" + agentName);  
+         logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
     }
 
 
@@ -114,7 +114,7 @@ window.myCPP = window.myCPP || {};
       acUrl +
       "connect/get-recording?format=mp3&callLegId=" +
       callContactId;
-    return "Listen to Call Recording: " + fullUrl;
+    return "Download call recording: " + fullUrl;
   }
 }
 
