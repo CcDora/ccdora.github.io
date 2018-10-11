@@ -1,6 +1,6 @@
 window.myCPP = window.myCPP || {};
 
-    //replace with the CCP URL for the current Amazon Connect instance
+    // Replace with the URL for the current Amazon Connect instance
     const ccpUrl = "https://implementation.awsapps.com/connect/ccp#/";
     const acUrl = "https://implementation.awsapps.com/";
 
