@@ -42,24 +42,25 @@ window.myCPP = window.myCPP || {};
   
         logInfoMsg("ContactId is " + contactId);   
         logInfoMsg("Contact is from queue " + queueName);          
-        logInfoMsg(acCallRecordingLink);
         logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
-        logInfoMsg("Attr1" + JSON.stringify(acAttribute.dnis.value));
+        logInfoMsg("DNIS is " + acAttribute.dnis.value);
+        logInfoMsg(acCallRecordingLink);
          
         updateContactAttribute(contact.getAttributes());   
 
-        contact.onConnected(updateUi);
+        contact.onConnected(refreshContactAttributeUi);
         contact.onEnded(clearContactAttribute);
     }
 
     function subscribeToAgentEvents(agent){
+         
          logInfoMsg("Subscribing to agent events...");
 
          let agentName = agent.getName();
-         let agentConfig = agent.getConfiguration();
+         //let agentConfig = agent.getConfiguration();
 
          logInfoMsg("Agent name is" + agentName);  
-         logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
+         //logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
     }
 
 
@@ -76,20 +77,20 @@ window.myCPP = window.myCPP || {};
             }
         }
 
-    function updateUi(contact){
-        logInfoMsg("Connecting agent and updating UI...");
+    function refreshContactAttributeUi(contact){
+        logInfoMsg("Connecting agent and updating attribute UI...");
        // logInfoMsg("LATEST attributes are " + JSON.stringify(window.myCPP.contact.getAttributes()));
         logInfoMsg("Latest call attributes are " + JSON.stringify(contact.getAttributes()));
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
-        console.log('Agent has been connected'); 
+        logInfoMsg("Agent has been connected"); 
 
     }
         
     function clearContactAttribute(){
-        let old_tbody= document.getElementById('attributesTable').getElementsByTagName('tbody')[0];
-        let new_tbody = document.createElement('tbody');    
-        old_tbody.parentNode.replaceChild(new_tbody, old_tbody);     
+        let oldTbody= document.getElementById('attributesTable').getElementsByTagName('tbody')[0];
+        let newTbody = document.createElement('tbody');    
+        oldTbody.parentNode.replaceChild(newTbody, oldTbody);     
     }
 
 
@@ -103,22 +104,20 @@ window.myCPP = window.myCPP || {};
     }
 
     function constructRecordingLink(callContactId) {
-    if (acUrl) {
-    // normalize minimal flexibility in source Url.
-    if (!acUrl.endsWith("/")) {
-      acUrl = acUrl + "/";
-    }
+        if (acUrl) {
+        // normalize minimal flexibility in source Url.
+        if (!acUrl.endsWith("/")) {
+          acUrl = acUrl + "/";
+        }
 
-    // sample URL= https://acsf-rd.awsapps.com/connect/get-recording?format=mp3&callLegId=6ba247f2-5726-41da-89b5-321460d1ab22
-    var fullUrl =
-      acUrl +
-      "connect/get-recording?format=mp3&callLegId=" +
-      callContactId;
-    return "Download call recording: " + fullUrl;
+        // sample URL= https://acsf-rd.awsapps.com/connect/get-recording?format=mp3&callLegId=6ba247f2-5726-41da-98b5-321460d1ab22
+        let fullUrl =
+          acUrl +
+          "connect/get-recording?format=mp3&callLegId=" +
+          callContactId;
+        return "Download call recording: " + fullUrl;
   }
 }
-
-
 
 
 // LogMessages section display controls
