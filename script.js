@@ -3,6 +3,7 @@ window.myCPP = window.myCPP || {};
     // Replace with the URL for the current Amazon Connect instance
     const ccpUrl = "https://calibrustrial.awsapps.com/connect/ccp#/";
     const acUrl = "https://calibrustrial.awsapps.com/";
+    const scriptBaseUrl = "https://callcenter.calibrus.com/#/scripts/";
 
     // Add any Amazon Connect contact attributes to be excluded
 
@@ -53,7 +54,6 @@ window.myCPP = window.myCPP || {};
         updateContactAttribute(contact.getAttributes());   
 
         contact.onConnected(refreshContactAttributeUi);
-        //  document.getElementById('calibrusscript').src = "https://callcenter.calibrus.com/#/scripts/1293/12345/Stephen/999/6024817070/en" ;
 
         contact.onEnded(clearContactAttribute);
     }
@@ -96,6 +96,9 @@ window.myCPP = window.myCPP || {};
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
         logInfoMsg("Agent has been connected"); 
+
+        let scriptUrl = constructScriptUrl('8443833608', 'c3ae7c2b-9e10-49e7-953c-6550bac55a90', 'Dora', 'dhodanic', '3125893355', 'es');
+        //document.getElementById('calibrusscript').src = scriptUrl";
         document.getElementById('calibrusscript').src = "https://callcenter.calibrus.com/#/scripts/1293/12345/Stephen/999/6024817070/en" ;
 
 
@@ -116,6 +119,30 @@ window.myCPP = window.myCPP || {};
         connect.getLog().info(msg);
         logMsgToScreen(msg);
     }
+
+
+    // Build Calibrus script URL 
+    
+    function constructScriptUrl(dnis, callContactId, agentName, agentUsername, ani, language) {
+
+        // sample URL= https://callcenter.calibrus.com/#/scripts/1293/12345/Stephen/999/6024817070/en
+        
+        let fullUrl =
+          scriptBaseUrl + 
+          dnis + 
+          "/" + 
+          callContactId +
+          "/" + 
+          agentName +
+          "/" + 
+          agentUsername +
+          "/" + 
+          ani +
+          "/" + 
+          language;
+                    ;
+        return fullUrl;
+  }
 
     // Build call recording link URL string
 
