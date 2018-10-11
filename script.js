@@ -2,9 +2,9 @@ window.myCPP = window.myCPP || {};
 
     //replace with the CCP URL for the current Amazon Connect instance
     const ccpUrl = "https://implementation.awsapps.com/connect/ccp#/";
-    var acEndpoint = "https://implementation.awsapps.com/";
+    const acUrl = "https://implementation.awsapps.com/";
 
-    //add any contact attributes to be excluded
+    // Add any Amazon Connect contact attributes to be excluded
 
     const CONFIG = 
           {
@@ -34,12 +34,17 @@ window.myCPP = window.myCPP || {};
             logInfoMsg("This is an existing contact for this agent");
         }
 
-        var contactId = contact.getContactId();
-        logInfoMsg("Contact is from queue " + contact.getQueue().name);    
-        logInfoMsg("ContactID is " + contactId);   
-        var recordingLinkDesc = ConstructRecordingLink(contactId);
-        logInfoMsg(recordingLinkDesc);
-        logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
+        let contactId = contact.getContactId();
+        let queueName = contact.getQueue().name;
+        let acCallRecordingLink = constructRecordingLink(contactId);
+        let acAttribute = contact.getAttributes();
+
+  
+        logInfoMsg("ContactId is " + contactId);   
+        logInfoMsg("Contact is from queue " + queueName);          
+        logInfoMsg("Download call recording " + acCallRecordingLink);
+        logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
+        logInfoMsg("Attr1" + JSON.stringify(acAttribute.dnis));
          
         updateContactAttribute(contact.getAttributes());   
 
@@ -48,11 +53,13 @@ window.myCPP = window.myCPP || {};
     }
 
     function subscribeToAgentEvents(agent){
-         console.log("Subscribing to agent events...");
-         var name = agent.getName();
-         console.log("Agent Name Is " + name);
-         var config = agent.getConfiguration();
-         console.log("Agent configuration is " + agent.username + " " + agent.name);
+         logInfoMsg("Subscribing to agent events...");
+
+         let agentName = agent.getName();
+         let agentConfig = agent.getConfiguration();
+
+         logInfoMsg("Agent name " + agentName);  
+         logInfoMsg("Agent configuration " + agentConfig);
     }
 
 
@@ -95,16 +102,16 @@ window.myCPP = window.myCPP || {};
         logMsgToScreen(msg);
     }
 
-    function ConstructRecordingLink(callContactId) {
-    if (acEndpoint) {
+    function constructRecordingLink(callContactId) {
+    if (acUrl) {
     // normalize minimal flexibility in source Url.
-    if (!acEndpoint.endsWith("/")) {
-      acEndpoint = acEndpoint + "/";
+    if (!acUrl.endsWith("/")) {
+      acUrl = acUrl + "/";
     }
 
     // sample URL= https://acsf-rd.awsapps.com/connect/get-recording?format=mp3&callLegId=6ba247f2-5726-41da-89b5-321460d1ab22
     var fullUrl =
-      acEndpoint +
+      acUrl +
       "connect/get-recording?format=mp3&callLegId=" +
       callContactId;
     return "Listen to Call Recording: " + fullUrl;
