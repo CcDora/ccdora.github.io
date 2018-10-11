@@ -53,6 +53,8 @@ window.myCPP = window.myCPP || {};
         updateContactAttribute(contact.getAttributes());   
 
         contact.onConnected(refreshContactAttributeUi);
+        //  document.getElementById('calibrusscript').src = "https://callcenter.calibrus.com/#/scripts/1293/12345/Stephen/999/6024817070/en" ;
+
         contact.onEnded(clearContactAttribute);
     }
 
@@ -94,6 +96,8 @@ window.myCPP = window.myCPP || {};
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
         logInfoMsg("Agent has been connected"); 
+        document.getElementById('calibrusscript').src = "https://callcenter.calibrus.com/#/scripts/1293/12345/Stephen/999/6024817070/en" ;
+
 
     }
         
