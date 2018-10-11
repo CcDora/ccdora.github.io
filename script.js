@@ -23,6 +23,9 @@ window.myCPP = window.myCPP || {};
     connect.contact(subscribeToContactEvents);   
     connect.agent(subscribeToAgentEvents);
 
+    // Subscribe to Amazon Connect contact object
+    // Gather call attributes when a new contact comes in 
+
     function subscribeToContactEvents(contact) {
         window.myCPP.contact = contact;
 
@@ -44,7 +47,6 @@ window.myCPP = window.myCPP || {};
         logInfoMsg("Contact is from queue " + queueName);          
         logInfoMsg("DNIS is " + acAttribute.dnis.value);
         logInfoMsg("ANI is " + acAttribute.ani.value);
-        //TODO-add language parameter
         logInfoMsg(acCallRecordingLink);
         logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
          
@@ -54,6 +56,8 @@ window.myCPP = window.myCPP || {};
         contact.onEnded(clearContactAttribute);
     }
 
+    // Subscribe to agent object
+
     function subscribeToAgentEvents(agent){
          
          logInfoMsg("Subscribing to agent events...");
@@ -61,10 +65,12 @@ window.myCPP = window.myCPP || {};
          let agentName = agent.getName();
          //let agentConfig = agent.getConfiguration();
 
-         logInfoMsg("Agent name is" + agentName);  
+         logInfoMsg("Agent name is " + agentName);  
          //logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
     }
 
+
+    // Update call attribute UI
 
     function updateContactAttribute(msg){
         const tableRef = document.getElementById('attributesTable').getElementsByTagName('tbody')[0];             
@@ -78,6 +84,8 @@ window.myCPP = window.myCPP || {};
                 }
             }
         }
+
+    // Refresh call attribute UI when the agent is connected to the call 
 
     function refreshContactAttributeUi(contact){
         logInfoMsg("Connecting agent and updating attribute UI...");
@@ -104,6 +112,8 @@ window.myCPP = window.myCPP || {};
         connect.getLog().info(msg);
         logMsgToScreen(msg);
     }
+
+    // Build call recording link URL string
 
     function constructRecordingLink(callContactId) {
         if (acUrl) {
