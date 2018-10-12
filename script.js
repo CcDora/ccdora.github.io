@@ -1,15 +1,8 @@
 window.myCPP = window.myCPP || {};
 
     // Replace with the URL for the current Amazon Connect instance
-    const ccpUrl = "https://calibrustrial.awsapps.com/connect/ccp#/";
-    const acUrl = "https://calibrustrial.awsapps.com/";
-
-    let dnis ;
-    let ani;
-    let agentName;
-    let agentId;
-    let language;
-    let wavName;
+    const ccpUrl = "https://implementation.awsapps.com/connect/ccp#/";
+    const acUrl = "https://implementation.awsapps.com/";
 
     // Add any Amazon Connect contact attributes to be excluded
 
@@ -30,9 +23,6 @@ window.myCPP = window.myCPP || {};
     connect.contact(subscribeToContactEvents);   
     connect.agent(subscribeToAgentEvents);
 
-    // Subscribe to Amazon Connect contact object
-    // Gather call attributes when a new contact comes in 
-
     function subscribeToContactEvents(contact) {
         window.myCPP.contact = contact;
 
@@ -44,20 +34,17 @@ window.myCPP = window.myCPP || {};
             logInfoMsg("This is an existing contact for this agent");
         }
 
-        let contactId =  contact.getContactId() ;
-        wavName = contact.getContactId();
+        let contactId = contact.getContactId();
         let queueName = contact.getQueue().name;
         let acCallRecordingLink = constructRecordingLink(contactId);
         let acAttribute = contact.getAttributes();
-        dnis = acAttribute.dnis.value.substr(-4);
-        ani = acAttribute.ani.value;
 
+  
         logInfoMsg("ContactId is " + contactId);   
         logInfoMsg("Contact is from queue " + queueName);          
-        logInfoMsg("DNIS is " + acAttribute.dnis.value);
-        logInfoMsg("ANI is " + acAttribute.ani.value);
-        logInfoMsg(acCallRecordingLink);
         logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
+        logInfoMsg("DNIS is " + acAttribute.dnis.value);
+        logInfoMsg(acCallRecordingLink);
          
         updateContactAttribute(contact.getAttributes());   
 
@@ -65,21 +52,17 @@ window.myCPP = window.myCPP || {};
         contact.onEnded(clearContactAttribute);
     }
 
-    // Subscribe to agent object
-
     function subscribeToAgentEvents(agent){
          
          logInfoMsg("Subscribing to agent events...");
 
-          agentName = agent.getName();
+         let agentName = agent.getName();
          //let agentConfig = agent.getConfiguration();
-         agentId = agentName;
-         logInfoMsg("Agent name is " + agentName);  
+
+         logInfoMsg("Agent name is" + agentName);  
          //logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
     }
 
-
-    // Update call attribute UI
 
     function updateContactAttribute(msg){
         const tableRef = document.getElementById('attributesTable').getElementsByTagName('tbody')[0];             
@@ -94,20 +77,13 @@ window.myCPP = window.myCPP || {};
             }
         }
 
-    // Refresh call attribute UI when the agent is connected to the call 
-
     function refreshContactAttributeUi(contact){
-
         logInfoMsg("Connecting agent and updating attribute UI...");
        // logInfoMsg("LATEST attributes are " + JSON.stringify(window.myCPP.contact.getAttributes()));
         logInfoMsg("Latest call attributes are " + JSON.stringify(contact.getAttributes()));
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
-        logInfoMsg("Agent has been connected");
-        let src =  "https://callcenter.calibrus.com/#/scripts/" + dnis + "/" + wavName + "/" + agentName + "/" + agentId + "/" + ani  + "/en"  ;
-        console.log("url:" ,src);
-        logInfoMsg("Script Url is " + src);
-       document.getElementById('calibrusscript').src = src;
+        logInfoMsg("Agent has been connected"); 
 
     }
         
@@ -126,8 +102,6 @@ window.myCPP = window.myCPP || {};
         connect.getLog().info(msg);
         logMsgToScreen(msg);
     }
-
-    // Build call recording link URL string
 
     function constructRecordingLink(callContactId) {
         if (acUrl) {

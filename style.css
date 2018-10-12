@@ -8,7 +8,7 @@ body {
     display:flex;
     justify-content:center;
     align-items: center;
-    max-width: 100%;
+    max-width: 705px;
 }
 
 .flex-container img{
@@ -18,7 +18,7 @@ body {
 
 
 .grid-container{
-    display: inline-grid;
+    display: grid;
     grid-template-columns: 350px 350px;
     grid-template-rows: 465px 465px;
     border: 1px solid #cbcbcb;
@@ -27,7 +27,6 @@ body {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
-    float: left;
 }
 
 .border {
@@ -94,17 +93,4 @@ input{
     max-height:365px;
     max-width: 665px;
     overflow: auto;  
-}
-
-.script{
-    width:800px ;
-    height: auto;
-    display: inline-block;
-    margin-left: 10px;
-}
-
-.scriptframe{
-    min-height: 950px;
-    min-width: 800px;
-    border: none;
 }
