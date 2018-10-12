@@ -80,7 +80,7 @@ window.myCPP = window.myCPP || {};
     function refreshContactAttributeUi(contact){
         logInfoMsg("Connecting agent and updating attribute UI...");
        // logInfoMsg("LATEST attributes are " + JSON.stringify(window.myCPP.contact.getAttributes()));
-        logInfoMsg("Latest call attributes are " + JSON.stringify(contact.getAttributes()));
+       // logInfoMsg("Latest call attributes are " + JSON.stringify(contact.getAttributes()));
         clearContactAttribute();
         updateContactAttribute(contact.getAttributes());
         logInfoMsg("Agent has been connected"); 
