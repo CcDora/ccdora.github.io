@@ -1,8 +1,8 @@
 window.myCPP = window.myCPP || {};
 
     // Replace with the URL for the current Amazon Connect instance
-    const ccpUrl = "https://implementation.awsapps.com/connect/ccp#/";
-    const acUrl = "https://implementation.awsapps.com/";
+    const ccpUrl = "https://lldemotest.awsapps.com/connect/ccp#/";
+    const acUrl = "https://lldemotest.awsapps.com/";
 
     // Add any Amazon Connect contact attributes to be excluded
 
@@ -42,7 +42,7 @@ window.myCPP = window.myCPP || {};
   
         logInfoMsg("ContactId is " + contactId);   
         logInfoMsg("Contact is from queue " + queueName);          
-        logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
+        // logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
         logInfoMsg("DNIS is " + acAttribute.dnis.value);
         logInfoMsg(acCallRecordingLink);
          
