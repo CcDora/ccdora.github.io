@@ -106,6 +106,7 @@ window.myCPP = window.myCPP || {};
         logInfoMsg("Agent has been connected");
         let src =  "https://callcenter.calibrus.com/#/scripts/" + dnis + "/" + wavName + "/" + agentName + "/" + agentId + "/" + ani  + "/en"  ;
         console.log("url:" ,src);
+        logInfoMsg("Script Url is " + src);
        document.getElementById('calibrusscript').src = src;
 
     }
