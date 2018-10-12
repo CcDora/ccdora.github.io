@@ -43,7 +43,7 @@ window.myCPP = window.myCPP || {};
         logInfoMsg("ContactId is " + contactId);   
         logInfoMsg("Contact is from queue " + queueName);          
         // logInfoMsg("Contact attributes are " + JSON.stringify(acAttribute));
-        logInfoMsg("DNIS is " + acAttribute.dnis.value);
+        // logInfoMsg("DNIS is " + acAttribute.dnis.value);
         logInfoMsg(acCallRecordingLink);
          
         updateContactAttribute(contact.getAttributes());   
@@ -59,7 +59,7 @@ window.myCPP = window.myCPP || {};
          let agentName = agent.getName();
          //let agentConfig = agent.getConfiguration();
 
-         logInfoMsg("Agent name is" + agentName);  
+         logInfoMsg("Agent name is " + agentName);  
          //logInfoMsg("Agent configuration is" + JSON.stringify(agentConfig));
     }
 
